@@ -1,7 +1,7 @@
 from rest_framework import serializers
-from loan.models.rate_table import Rate_Table
+from loan.models.rate_table import RateTable
 
 class RateTableSerializer(serializers.ModelSerializer):
   class Meta:
-    model = Rate_Table
+    model = RateTable
     fields = '__all__'
