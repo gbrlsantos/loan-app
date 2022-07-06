@@ -2,6 +2,6 @@ from django.contrib import admin
 from loan.models.installment import Installment
 
 class Installments(admin.ModelAdmin):
-  list_diplay = ('__all__')
+  model = Installment
   
 admin.site.register(Installment, Installments)
