@@ -4,5 +4,5 @@ from .installment import Installment
 
 class RateTable(models.Model):
   name = models.CharField(max_length=30)
-  installments = models.ManyToManyField(Installment)
+  installment = models.ManyToManyField(Installment, related_name='installment')
   
