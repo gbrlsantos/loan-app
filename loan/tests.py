@@ -1,14 +1,15 @@
 import json
+
 from rest_framework import status
 from rest_framework.test import APITestCase
 
+from loan.models.bank import Bank
+from loan.models.client import Client
+from loan.models.installment import Installment
 from loan.models.solicitation import Solicitation
+from loan.serializers.client_serializer import ClientSerializer
 from loan.serializers.solicitation_serializer import SolicitationSerializer
 
-from loan.models.installment import Installment
-from loan.models.client import Client
-from loan.serializers.client_serializer import ClientSerializer
-from loan.models.bank import Bank
 
 class TestCaseSetUp():
   def execute(self):
@@ -79,13 +80,3 @@ class SolicitationTestCase(APITestCase):
     self.assertEqual(response.data, serialized_solicitations.data)
     self.assertEqual(response.status_code, status.HTTP_200_OK)
 
-class ClientTestCase(APITestCase):
-  def setUp(self):
-    TestCaseSetUp.execute(self)
-
-  def test_get_single_valid_client(self):
-    response = self.client.get("/clients/", {"cpf": 12345678911})
-    client = Client.objects.get(cpf=12345678911)
-    serialized_client = ClientSerializer(client)
-    self.assertEqual(response.json(), serialized_client.data)
-    self.assertEqual(response.status_code, status.HTTP_200_OK)
