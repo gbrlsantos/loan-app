@@ -6,4 +6,4 @@ class ClientSerializer(serializers.ModelSerializer):
   bank = BankSerializer(read_only=True, many=False)
   class Meta:
     model = Client
-    fields = ('name', 'phone', 'cpf', 'bank')
+    fields = ('id', 'name', 'phone', 'cpf', 'bank')

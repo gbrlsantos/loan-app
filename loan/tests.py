@@ -1,3 +1,4 @@
+import json
 from rest_framework import status
 from rest_framework.test import APITestCase
 
@@ -74,6 +75,7 @@ class SolicitationTestCase(APITestCase):
     response = self.client.get("/solicitations/")
     solicitations = Solicitation.objects.all()
     serialized_solicitations = SolicitationSerializer(solicitations, many=True)
+    print(json.dumps(response.data))
     self.assertEqual(response.data, serialized_solicitations.data)
     self.assertEqual(response.status_code, status.HTTP_200_OK)
 
@@ -85,7 +87,5 @@ class ClientTestCase(APITestCase):
     response = self.client.get("/clients/", {"cpf": 12345678911})
     client = Client.objects.get(cpf=12345678911)
     serialized_client = ClientSerializer(client)
-    print(response.data)
-    print(serialized_client.data)
     self.assertEqual(response.json(), serialized_client.data)
     self.assertEqual(response.status_code, status.HTTP_200_OK)
